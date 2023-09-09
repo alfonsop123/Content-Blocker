@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "Game Blocker Extension",
   "version": "1.0",
   "description": "Block games on websites",
@@ -8,19 +8,17 @@
     "storage",
     "scripting"
   ],
-  "action": {
+  "browser_action": {
     "default_popup": "popup.html"
   },
   "background": {
-    "service_worker": "background.js"
+    "scripts": ["background.js"],
+    "persistent": false
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"]
     }
-  ],
-  "browser_action": {
-    "default_popup": "popup.html"
-  }
+  ]
 }
