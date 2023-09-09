@@ -2,16 +2,20 @@
 
 // Function to block content on the webpage
 function blockContentOnPage(blockedGames, blockedWebsites) {
+    // Block games
     blockedGames.forEach(game => {
-        // Add logic to block game-related content here
+        const elementsToBlock = document.querySelectorAll(`:contains('${game}')`);
+        elementsToBlock.forEach(element => {
+            element.style.display = 'none'; // Hide or remove the game-related content
+        });
     });
 
-    blockedWebsites.forEach(website => {
-        if (window.location.href.includes(website)) {
-            // Block the website by hiding content, redirecting, or taking appropriate action
-            document.body.innerHTML = '<h1>This website is blocked.</h1>';
-        }
-    });
+    // Block websites
+    const currentWebsite = window.location.hostname;
+    if (blockedWebsites.includes(currentWebsite)) {
+        // Redirect to a blocked page or take other appropriate action
+        window.location.href = chrome.runtime.getURL('blocked.html');
+    }
 }
 
 // Get the blocked games and websites lists from storage
