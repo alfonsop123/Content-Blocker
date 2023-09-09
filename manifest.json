@@ -8,12 +8,11 @@
     "storage",
     "scripting"
   ],
-  "browser_action": {
+  "action": {
     "default_popup": "popup.html"
   },
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
