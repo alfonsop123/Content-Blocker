@@ -1,20 +1,15 @@
 // content.js
 
-// Function to block games on the webpage
-function blockGamesOnPage(blockedGames) {
-    const blockedGamesSelector = blockedGames.map(game => `:contains('${game}')`).join(',');
-    const elementsToBlock = document.querySelectorAll(blockedGamesSelector);
-
-    elementsToBlock.forEach(element => {
-        element.style.display = 'none'; // Hide or remove the game-related content
-    });
+// Function to block games and websites on the webpage
+function blockContentOnPage(blockedGames, blockedWebsites) {
+    // Add code to block games and websites here
 }
 
-// Get the blocked games list from storage
-chrome.storage.sync.get(['blockedGames'], function(result) {
+// Get the blocked games and websites lists from storage
+chrome.storage.sync.get(['blockedGames', 'blockedWebsites'], function(result) {
     const blockedGames = result.blockedGames || [];
-    if (blockedGames.length > 0) {
-        // Call the function to block games on the current webpage
-        blockGamesOnPage(blockedGames);
-    }
+    const blockedWebsites = result.blockedWebsites || [];
+
+    // Call the function to block games and websites on the current webpage
+    blockContentOnPage(blockedGames, blockedWebsites);
 });
