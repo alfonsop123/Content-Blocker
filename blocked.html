@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blocked Website</title>
+</head>
+<body>
+    <h1>This website is blocked</h1>
+    <p>Blocked by: Game Blocker Extension</p>
+    <p>Blocked on: <span id="block-date"></span></p>
+    <p>URL: <span id="blocked-url"></span></p>
+
+    <script>
+        // Get the current date and time
+        const currentDate = new Date();
+
+        // Get the blocked URL from the query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const blockedUrl = urlParams.get('url');
+
+        // Display the date, user, and URL in the HTML
+        document.getElementById('block-date').textContent = currentDate.toLocaleString();
+        document.getElementById('blocked-url').textContent = blockedUrl;
+    </script>
+</body>
+</html>
