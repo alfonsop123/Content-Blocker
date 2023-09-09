@@ -1,23 +1,19 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const blockButton = document.getElementById('block-button');
+// popup.js
 
-    blockButton.addEventListener('click', function () {
-        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-            chrome.scripting.executeScript({
-                target: { tabId: tabs[0].id },
-                function: blockGamesOnWebsite,
-            });
-        });
-    });
+const gameInput = document.getElementById('game-input');
+const addGameBtn = document.getElementById('add-game');
+const websiteInput = document.getElementById('website-input');
+const addWebsiteBtn = document.getElementById('add-website');
 
-    function blockGamesOnWebsite() {
-        // Content script to block games on websites
-        const blockedGames = JSON.parse(localStorage.getItem('blockedGames')) || [];
-        const blockedGamesSelector = blockedGames.map(game => `:contains('${game}')`).join(',');
-        const elementsToBlock = document.querySelectorAll(blockedGamesSelector);
+// ... (Existing code for blocking games)
 
-        elementsToBlock.forEach(element => {
-            element.style.display = 'none';
-        });
+// Add a website to the blocked list
+addWebsiteBtn.addEventListener('click', function () {
+    const website = websiteInput.value.trim();
+    if (website !== '' && !blockedWebsites.includes(website)) {
+        blockedWebsites.push(website);
+        chrome.storage.sync.set({ 'blockedWebsites': blockedWebsites });
+        websiteInput.value = '';
+        // Add logic to update the blocked websites list on your website if needed
     }
 });
